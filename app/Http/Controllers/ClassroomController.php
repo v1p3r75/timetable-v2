@@ -10,34 +10,39 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        
-        return view('admin.classrooms',[ 'classrooms' => Classroom::all() ] );
+
+        return view('admin.classrooms', ['classrooms' => Classroom::all()]);
     }
     public function create()
     {
-        return view('admin.form.classroom',[ 'classroom' => new Classroom()]) ;
+        return view('admin.form.classroom', ['classroom' => new Classroom()]);
     }
     public function store(ClassroomRequest $request)
     {
         $classroom = new Classroom();
-        $classroom = $classroom->create($request->validated());
-        toastr()->success("La salle de classe à été créer avec succès !") ;
-        return redirect()->route('classroom.index') ;
+        $data = $request->validated();
+        $data['status'] = $data['status'] === 'on';
+        $classroom = $classroom->create($data);
+
+        toastr()->success("La salle de classe à été créer avec succès !");
+        return redirect()->route('classroom.index');
     }
     public function edit(Classroom $classroom)
     {
-        return view('admin.form.classroom', ['classroom' => $classroom]) ;
+        return view('admin.form.classroom', ['classroom' => $classroom]);
     }
-    public function update(Classroom $classroom ,ClassroomRequest $request)
+    public function update(Classroom $classroom, ClassroomRequest $request)
     {
-        $classroom = $classroom->update($request->validated());
-        toastr()->success("La salle de classe à été mise à jour avec succès !") ;
+        $data = $request->validated();
+
+        $classroom = $classroom->update($data);
+        toastr()->success("La salle de classe à été mise à jour avec succès !");
         return redirect()->route('classroom.index');
     }
     public function destroy(Classroom $classroom)
     {
         $classroom = $classroom->delete();
-        toastr()->success("La salle de classe à été supprimer avec succès  !") ;
-        return redirect()->route('classroom.index') ;
+        toastr()->success("La salle de classe à été supprimer avec succès  !");
+        return redirect()->route('classroom.index');
     }
 }

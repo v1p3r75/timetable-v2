@@ -15,8 +15,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('label');
-            $table->string('code');
-            $table->integer('total_time');
+            $table->string('code')->unique();
             $table->ForeignIdFor(Level::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

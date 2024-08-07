@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Level;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Auth;
@@ -17,7 +18,7 @@ class RegisterController extends Controller
 {
     public function create()
     {
-        return view('Auth.register' , ['levels' => Level::all()]);
+        return view('Auth.register', ['levels' => Level::all()]);
     }
     public function store(RegisterRequest $request)
     {
@@ -27,11 +28,10 @@ class RegisterController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'level_id' => $request->level_id,
-            'role_id' => 3,
+            'role_id' => Role::STUDENT,
             'password' => Hash::make($request->password),
         ]);
-        Auth::login($user) ;
+        Auth::login($user);
         return redirect(RouteServiceProvider::STUDENT);
     }
-    
 }

@@ -10,11 +10,10 @@
     <table class="table table-striped shadow-sm w-100" id="myTable">
         <thead class="bg-white">
             <tr>
-                <th>code</th>
-                <th>label</th>
-                <th>Heure total</th>
+                <th>Code</th>
+                <th>Label</th>
                 <th>Classe</th>
-                <th class="">Actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +22,6 @@
                 <tr>
                 <td>{{ $subject->code }}</td>
                 <td>{{ $subject->label }}</td>
-                <td>{{ $subject->total_time }}</td>
                 <td>{{ $subject->level->label }}</td>
                 <td>
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">

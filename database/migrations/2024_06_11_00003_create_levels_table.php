@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
             $table->string('label');
+            $table->integer('total_students');
             $table->timestamps();
         });
     }

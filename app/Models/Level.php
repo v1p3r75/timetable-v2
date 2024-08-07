@@ -9,6 +9,7 @@ class Level extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'label'
+        'label',
+        'total_students'
     ];
 }

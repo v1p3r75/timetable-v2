@@ -40,6 +40,7 @@ searchButton.addEventListener('click', function (e) {
 })
 
 
+const btns = document.querySelectorAll('.add-timetable');
 
 
 
@@ -174,3 +175,9 @@ pad.forEach(element => {
 	}
 });
 
+// const container = modal.querySelector('.f-content');
+// const content = modal.querySelector('.f-content .group');
+// container.innerHTML = ""
+// const contentClone = content.cloneNode(true);
+// container.appendChild(contentClone)
+                            

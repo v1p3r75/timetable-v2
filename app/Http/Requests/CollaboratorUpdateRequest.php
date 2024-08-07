@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LevelRequest extends FormRequest
+class CollaboratorUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,11 @@ class LevelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label' => 'required',
-            'total_students' => 'required|numeric',
+            'firstname' => ['required' , 'min:3' , 'string'],
+            'lastname' => ['required' , 'min:3' , 'string'],
+            'email' => ['required','email'],
+            'phone' => ['required'],
+            'serial_number' => ["nullable"],
         ];
     }
 }

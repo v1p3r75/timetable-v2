@@ -22,7 +22,7 @@ class TimestableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'teacher' => ['required'],
+            'teacher' => ['required|numeric'],
             'subject' => ['required'],
             'classroom' => ['required',],
             'level' => ['required'],

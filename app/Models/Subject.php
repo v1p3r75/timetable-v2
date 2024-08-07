@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Subject extends Model
 {
     use HasFactory;
-    public function level() :BelongsTo
+    public function level(): BelongsTo
     {
-        return $this->belongsTo(Level::class) ;
+        return $this->belongsTo(Level::class);
     }
     protected $fillable = [
-        'label','code','total_time','level_id',
+        'label', 'code', 'level_id',
     ];
 }

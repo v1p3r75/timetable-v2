@@ -24,7 +24,6 @@ class SubjectRequest extends FormRequest
         return [
             'label' => ['required', 'string'],
             'code' => ['required', 'string'],
-            'total_time' => ['required', 'integer'],
             'level_id' => ['required', "exists:levels,id", ],
         ];
     }

@@ -13,6 +13,7 @@
                 <th>Profile</th>
                 <th>Nom</th>
                 <th>Prénom(s)</th>
+                <th>Matricule</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th class="">Actions</th>
@@ -22,14 +23,15 @@
                 {{-- @dd($teachers) --}}
                 @foreach ($teachers as $teacher)
                 <tr>
-                <td><img src="{{ $teacher->profil() }}" alt="" style="width: width: 36px;height: 36px;object-fit: cover;border-radius: 50%; "></td>
+                <td><img src="{{ $teacher->profil() }}" alt="" style="width: 36px;height: 36px;object-fit: cover;border-radius: 50%; "></td>
                 <td>{{ $teacher->lastname }}</td>
                 <td>{{ $teacher->firstname }}</td>
+                <td>{{ $teacher->serial_number }}</td>
                 <td>{{ $teacher->phone }}</td>
                 <td>{{ $teacher->email }}</td>
                 <td class="">
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
-                        <a href="{{ route('teacher.edit', $teacher) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit" style=""></i></a>
+                        <a href="{{ route('teacher.edit', $teacher) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>
                         <button class="btn btn-danger rounded-1 btn-action delete-btn">
                             <i class="bx bx-trash"></i>
                         </button>

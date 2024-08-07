@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('label');
             $table->timestamps();
         });
-        DB::table('roles')->insert([
-            ['id' => 1 , 'label' =>"Collaborateur"],
-            ['id' => 2 , 'label' =>"Teacher"],
-            ['id' => 3 , 'label' =>"student"],
-        ]);
     }
 
     /**

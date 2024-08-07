@@ -17,13 +17,8 @@ return new class extends Migration
     {
         Schema::create('timetables', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Subject::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Classroom::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Level::class)->constrained()->cascadeOnDelete();
-            $table->timestamp('start_time') ;
-            $table->timestamp('end_time') ;
-            $table->integer('week') ;
             $table->timestamps();
         });
     }

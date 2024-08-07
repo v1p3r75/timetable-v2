@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row my-4">
+            <div class="col-md-4">
                 <label for="teacherinput" class="mt-2">Email</label>
                 <input type="email" id="teacherinput" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$teacher->email) }}">
                 <div class="invalid-feedback">
@@ -41,11 +41,20 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="teacherinput" class="mt-2">Phone</label>
                 <input type="text" id="teacherinput" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$teacher->phone) }}">
                 <div class="invalid-feedback">
                     @error('phone')
+                       {{ $message }} 
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="teacherinput" class="mt-2">Matricule</label>
+                <input type="text" id="teacherinput" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" value="{{ old('serial_number',$teacher->serial_number) }}">
+                <div class="invalid-feedback">
+                    @error('serial_number')
                        {{ $message }} 
                     @enderror
                 </div>
