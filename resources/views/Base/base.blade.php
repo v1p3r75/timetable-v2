@@ -40,6 +40,8 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.11.1/sweetalert2.all.min.js" integrity="sha512-awhfGDoHs6zOw2bGnlOX1tFMpn62CLz2skNks2+LiDdJIRi9rkXrf5A1fVb7VgFyymxFVp6EfFqOZFr8sqPu6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="/css/timetablejs.css">
     <script src="/js/timetable.js"></script>
@@ -114,15 +116,39 @@
                 options: options
             });
 
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
         })
 
         const append_btns = document.querySelectorAll('.add-timetable');
         const del_btns = document.querySelectorAll('.delete-timetable');
+        const tasks_to_delete = [];
+        const new_tasks = [];
 
         const deleteLine = (e) => {
             e.preventDefault();
 
             const parent = e.currentTarget.parentElement.parentElement;
+
+            const id = parent.querySelector('input[name="timetable_id[]"]')?.value;
+
+            id != 'null' ? tasks_to_delete.push(id) : null;
 
             parent.outerHTML = ""
         }
@@ -139,7 +165,7 @@
                     const clone = form.cloneNode(true);
                     const new_form = parent.appendChild(clone);
 
-                    new_form.querySelector('input[type="hidden"]').value = btn.getAttribute('data-timetable-id');
+                    new_form.querySelector('input[name="day[]"]').value = btn.getAttribute('data-timetable-id');
                     new_form.querySelector('.delete-timetable')?.addEventListener('click', deleteLine)
                 })
             })
@@ -151,25 +177,53 @@
             })
         }
 
-        const sendData = (e) => {
+        const sendData = (e, edit) => {
 
             e.preventDefault();
+            let route = '/admin/timetable/'
 
             const body = new FormData(document.querySelector('.timetable-form'));
 
-            return fetch('/admin/timetable', {
+            if (edit) {
+
+                route += document.querySelector('input[name="id"]').value;
+                body.delete('_method');
+                body.append('_method', 'PATCH');
+                body.append('tasks_to_delete[]', tasks_to_delete);
+            }
+
+            return fetch(route, {
                     method: 'POST',
                     body,
                     headers: {
                         'Accept': 'application/json'
                     }
                 }).then(response => response.json())
-                .then(response => console.log(response))
+                .then(response => {
+
+                    if (response.success) {
+
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                window.location.pathname = "/admin/timetable";
+                                resolve(true);
+                            }, 1500)
+                        })
+                        
+                        return toastr.success(response.message);
+                    }
+
+                    return toastr.error(response.message);
+                })
                 .catch(error => console.error('e', error))
 
         }
 
-        document.querySelector('.timetable-form button[type="submit"]')?.addEventListener('click', sendData)
+        const submit = document.querySelector('.timetable-form button[type="submit"]')
+
+        if (submit) {
+            submit.addEventListener('click', (e) => sendData(e, submit.getAttribute('data-form-type') === "edit"));
+        }
     </script>
 </body>
 

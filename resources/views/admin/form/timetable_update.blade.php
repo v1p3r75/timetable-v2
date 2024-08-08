@@ -5,6 +5,7 @@
     @csrf
     <h5>Modifier un emploi du temps</h5>
     <div class="row">
+        <input type="hidden" name="id" value="{{ $timetable->id }}">
         <div class="col-md-6">
             <label for="timetableinput" class="mt-2">Classe</label>
             <select id="timetableinput" name="level" class="form-control @error('level') is-invalid @enderror">
@@ -58,6 +59,7 @@
                             @if ($timetable->day === $key)
                             <div class="template-form">
                                 <input type="hidden" name="day[]" value="{{$timetable->day}}" />
+                                <input type="hidden" name="timetable_id[]" value="{{ $timetable->id }}">
                                 <div class="row content">
                                     <div class="col-md-6">
                                         <label for="timetableinput" class="mt-2">Heure de début</label>
@@ -128,13 +130,14 @@
         </div>
 
         <div class="mt-5">
-            <button type="submit" class="btn btn-primary shadow mt-2 send-form">Créer</button>
+            <button type="submit" class="btn btn-primary shadow mt-2 send-form" data-form-type="edit">Modifier</button>
         </div>
 
 </form>
 <template id="template">
     <div class="template-form">
         <input type="hidden" name="day[]" value="" />
+        <input type="hidden" name="timetable_id[]" value="null">
         <div class="row content">
             <div class="col-md-6">
                 <label for="timetableinput" class="mt-2">Heure de début</label>

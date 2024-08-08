@@ -20,6 +20,15 @@ class TimetableController extends Controller
 {
     private array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
+    private array $rules = [
+        'teacher' => ['required', 'array'],
+        'subject' => ['required',],
+        'start_time' => ['required', 'array'],
+        'end_time' => ['required', 'array'],
+        'level' => ['required', 'numeric'],
+        'classroom' => ['required', 'numeric']
+    ];
+
     /**
      * Display a listing of the resource.
      */
@@ -38,12 +47,12 @@ class TimetableController extends Controller
         $classrooms = Classroom::all();
         $levels = Level::all();
 
-        $classrooms_not_programmed = $classrooms->filter(function($classroom) {
+        $classrooms_not_programmed = $classrooms->filter(function ($classroom) {
 
             return is_null($classroom->timetable);
         });
 
-        $levels_not_programmed = $levels->filter(function($level) {
+        $levels_not_programmed = $levels->filter(function ($level) {
 
             return is_null($level->timetable);
         });
@@ -63,19 +72,10 @@ class TimetableController extends Controller
      */
     public function store(Request $request, Timetable $timetable, TimetableByDay $days)
     {
-        $rules = [
-            'teacher' => ['required', 'array'],
-            'subject' => ['required',],
-            'start_time' => ['required', 'array'],
-            'end_time' => ['required', 'array'],
-            'level' => ['required', 'numeric'],
-            'classroom' => ['required', 'numeric']
-        ];
 
-        if ($result = validator($request->all(), $rules)->fails()) {
+        if (validator($request->all(), $this->rules)->fails()) {
 
             return response()->json(['success' => false, 'message' => "Vérifier si les champs sont tous remplis"]);
-
         }
 
         DB::beginTransaction();
@@ -89,7 +89,6 @@ class TimetableController extends Controller
             if (!isset($request->teacher[$key], $request->subject[$key], $request->start_time[$key], $request->end_time[$key])) {
 
                 return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . $this->days[$day]]);
-  
             }
 
             try {
@@ -103,29 +102,26 @@ class TimetableController extends Controller
                         'success' => false,
                         'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", $this->days[$day], $request->end_time[$key], $request->start_time[$key])
                     ]);
-                }                
+                }
                 // if ($days->where(['day' => $key]))
 
                 $days->insert([
-                    'day' => $key,
+                    'day' => $day,
                     'timetable_id' => $timetable->id,
                     'user_id' => $request->teacher[$key],
                     'subject_id' => $request->subject[$key],
                     'start_time' => $start_time,
                     'end_time' => $end_time,
                 ]);
-
             } catch (Exception $e) {
 
                 return response()->json(['success' => false, 'message' => "Une erreur s'est produite"]);
-
             }
         }
 
         DB::commit();
 
         return response()->json(['success' => true, 'message' => "Emploi du temps crée avec succés"]);
-
     }
 
     /**
@@ -150,31 +146,105 @@ class TimetableController extends Controller
             'days' => $this->days
         ]);
     }
-    public function update(Timetable $timetable, TimestableRequest $request)
+    public function update(Timetable $timetable, Request $request, TimetableByDay $days)
     {
-        $startformat = new DateTime($request->start_time);
-        $endformat = new DateTime($request->end_time);
 
-        $start = $startformat->format('Y-m-d H:i');
-        $end = $endformat->format('Y-m-d H:i');
+        if (validator($request->all(), $this->rules)->fails()) {
 
-        $week = $startformat->format('W');
-
-        if ($start < $end) {
-            $timetable->update([
-                'week' => $week,
-                'user' => $request->teacher,
-                'subject' => $request->subject,
-                'classroom' => $request->classroom,
-                'level' => $request->level,
-                'start_time' => $start,
-                'end_time' => $end,
-            ]);
-            toastr()->success("L'emploi du temps à été mise à jour avec succès !");
-        } else {
-            toastr()->error("L'heure de debut ne doit pas être superieure à celle de fin ?!");
+            return response()->json(['success' => false, 'message' => "Vérifier si les champs sont tous remplis"]);
         }
-        return redirect()->route('timetable.index');
+
+        DB::beginTransaction();
+
+        if (($timetable->level_id != $request->level) && Timetable::where(['level_id' => $request->level])->first()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => "La classe que vous avez sélectionné a déjà un emploi du temps"
+            ]);
+        }
+
+        if (($timetable->classroom_id != $request->classroom) && Timetable::where(['classroom_id' => $request->classroom])->first()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => "La salle que vous avez sélectionné a déjà un emploi du temps"
+            ]);
+        }
+        $timetable->update(['classroom_id' => $request->classroom, 'level_id' => $request->level]);
+
+
+        foreach ($request->day as $key => $day) {
+
+            if (!isset($request->teacher[$key], $request->subject[$key], $request->start_time[$key], $request->end_time[$key])) {
+
+                return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . $this->days[$day]]);
+            }
+        }
+
+        foreach ($request->timetable_id as $key => $timetable_day) {
+
+            try {
+
+                $start_time = new DateTime($request->start_time[$key]);
+                $end_time = new DateTime($request->end_time[$key]);
+
+                if ($start_time > $end_time) {
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", $this->days[$day], $request->end_time[$key], $request->start_time[$key])
+                    ]);
+                }
+
+                // insert a new timetable
+
+                if ($timetable_day === 'null') {
+
+                    $days->insert([
+                        'day' => $request->day[$key],
+                        'timetable_id' => $timetable->id,
+                        'user_id' => $request->teacher[$key],
+                        'subject_id' => $request->subject[$key],
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
+                    ]);
+                    
+
+                } else { // update an existing timetable
+
+                    $result = $days->where(['id' => $timetable_day])->first();
+
+                    $result->update([
+                        'user_id' => $request->teacher[$key],
+                        'subject_id' => $request->subject[$key],
+                        'start_time' => $start_time,
+                        'end_time' => $end_time,
+                    ]);
+                    
+                }
+                
+
+            } catch (Exception $e) {
+
+                return response()->json(['success' => false, 'message' => "Une erreur s'est produite"]);
+            }
+        }
+
+        // delete timetable
+
+        foreach($request->tasks_to_delete as $task) {
+
+            if (isset($task)) {
+
+                TimetableByDay::destroy($task);
+                
+            }
+        }
+
+        DB::commit();
+
+        return response()->json(['success' => true, 'message' => "Emploi du temps modifié avec succés"]);
     }
 
     public function destroy(Timetable $timetable)
