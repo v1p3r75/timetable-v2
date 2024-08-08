@@ -11,4 +11,9 @@ class Classroom extends Model
     protected $fillable = [
         'label','capacity','status','description',
     ];
+
+    public function timetable() {
+
+        return $this->hasOne(Timetable::class);
+    }
 }

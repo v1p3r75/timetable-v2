@@ -12,7 +12,7 @@
                 <tr>
                     <th>#</th>
                     <th>Classe</th>
-                    <th>Visualiser</th>
+                    <th>Salle de cours</th>
                     <th class="">Actions</th>
                 </tr>
             </thead>
@@ -22,11 +22,14 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $timetable->level->label}}</td>
-                    <td><a class="btn btn-primary rounded-pill" href="{{ route('timetable.show',$timetable) }}">voir emploi</a></td>
+                    <td>{{ $timetable->classroom->label}}</td>
                     <td class="">
                         <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
-                            <a href="{{ route('timetable.edit', $timetable) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit" style=""></i></a>
-                            <button class="btn btn-danger rounded-1 btn-action delete-btn">
+                            <button class="btn btn-primary rounded-1 btn-action" title="Voir">
+                                <i class="bx bx-view"></i>
+                            </button>
+                            <a title="Editer" href="{{ route('timetable.edit', $timetable) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>
+                            <button class="btn btn-danger rounded-1 btn-action delete-btn" title="Supprimer">
                                 <i class="bx bx-trash"></i>
                             </button>
                         </div>

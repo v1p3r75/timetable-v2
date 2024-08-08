@@ -8,6 +8,7 @@ use App\Models\Level;
 use App\Models\Role;
 use App\Models\Subject;
 use App\Models\Timetable;
+use App\Models\TimetableByDay;
 use App\Models\User;
 use DateTime;
 use DB;
@@ -17,7 +18,7 @@ use Validator;
 
 class TimetableController extends Controller
 {
-    private array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+    private array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
     /**
      * Display a listing of the resource.
@@ -35,12 +36,23 @@ class TimetableController extends Controller
         $teachers = User::query();
         $teachers->where('role_id', '=', Role::TEACHER);
         $classrooms = Classroom::all();
+        $levels = Level::all();
+
+        $classrooms_not_programmed = $classrooms->filter(function($classroom) {
+
+            return is_null($classroom->timetable);
+        });
+
+        $levels_not_programmed = $levels->filter(function($level) {
+
+            return is_null($level->timetable);
+        });
 
         return view('admin.form.timetable', [
             'timetable' => new Timetable(),
             'teachers' => $teachers->get(),
-            'classrooms' => $classrooms,
-            'levels' => Level::all(),
+            'classrooms' => $classrooms_not_programmed,
+            'levels' => $levels_not_programmed,
             'subjects' => Subject::all(),
             'days' => $this->days
         ]);
@@ -49,7 +61,7 @@ class TimetableController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Timetable $timetable)
+    public function store(Request $request, Timetable $timetable, TimetableByDay $days)
     {
         $rules = [
             'teacher' => ['required', 'array'],
@@ -91,9 +103,7 @@ class TimetableController extends Controller
                         'success' => false,
                         'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", $this->days[$day], $request->end_time[$key], $request->start_time[$key])
                     ]);
-                }
-                $days = DB::table('timetable_days');
-                
+                }                
                 // if ($days->where(['day' => $key]))
 
                 $days->insert([
@@ -126,13 +136,19 @@ class TimetableController extends Controller
         return view('admin.timetableshow', compact('timetable'));
     }
 
-    public function edit(Timetable $timetable)
+    public function edit(Timetable $timetable, User $user)
     {
-        $teachers = User::query();
-        $teachers->where('role_id', '=', 2);
-        $classrooms = Classroom::query();
-        $classrooms->where('status', '=', 'on');
-        return view('admin.form.timetable', ['timetable' => $timetable, 'teachers' => $teachers->get(), 'classrooms' => $classrooms->get(), 'levels' => Level::all(), 'subjects' => Subject::all()]);
+        $teachers = User::where(['role_id' => Role::TEACHER]);
+
+        return view('admin.form.timetable_update', [
+            'timetable' => $timetable,
+            'timetable_days' => TimetableByDay::where(['timetable_id' => $timetable->id])->get(),
+            'teachers' => $teachers->get(),
+            'classrooms' => Classroom::all(),
+            'levels' => Level::all(),
+            'subjects' => Subject::all(),
+            'days' => $this->days
+        ]);
     }
     public function update(Timetable $timetable, TimestableRequest $request)
     {

@@ -12,4 +12,9 @@ class Level extends Model
         'label',
         'total_students'
     ];
+
+    public function timetable() {
+
+        return $this->hasOne(Timetable::class);
+    }
 }
