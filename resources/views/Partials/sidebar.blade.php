@@ -6,9 +6,7 @@ $route = Route::currentRouteName()
 		<i class='bx bxs-book'></i>
 		<span class="text">LT Natitingou</span>
 	</a>
-	@switch(Auth::user()->role_id)
-	@case(App\Models\Role::CENSOR || App\Models\Role::DEPUTY_CENSOR)
-
+	@if(in_array(Auth::user()->role_id, [App\Models\Role::CENSOR, App\Models\Role::DEPUTY_CENSOR]))
 	<ul class="side-menu top">
 		<li @class(['', 'active'=> str_starts_with($route , 'admin.dash')])>
 			<a href="{{ route('admin.dashboard') }}">
@@ -60,8 +58,29 @@ $route = Route::currentRouteName()
 			</a>
 		</li>
 	</ul>
-	@break
-	@default
+	@elseif (Auth::user()->role_id === App\Models\Role::STUDENT)
+	<ul class="side-menu top">
+		<li @class(['', 'active'=> str_starts_with($route , 'student.dash')])>
+			<a href="{{ route("student.index") }}">
+				<i class='bx bxs-dashboard'></i>
+				<span class="text">Dashboard</span>
+			</a>
+		</li>
+		<li @class(['', 'active'=> $route === 'student.timetable.index'])>
+			<a href="{{ route('student.timetable.index') }}">
+				<i class='bx bxs-calendar'></i>
+				<span class="text">Emplois du Temps</span>
+			</a>
+		</li>
+		<li @class(['', 'active'=> str_starts_with($route , 'faq.')])>
+			<a href="{{ route('faq.index') }}">
+				<i class='bx bxs-help-circle'></i>
+				<span class="text">FAQ</span>
+			</a>
+		</li>
+
+	</ul>
+	@else
 	<ul class="side-menu top">
 		<li @class(['', 'active'=> str_starts_with($route , 'student.dash')])>
 			<a href="/">
@@ -83,7 +102,7 @@ $route = Route::currentRouteName()
 		</li>
 
 	</ul>
-	@endswitch
+	@endif
 	<ul class="side-menu">
 		<li @class(['', 'active'=> str_starts_with($route , 'profile.')]) >
 			<a href="{{ route('profile.edit') }}">

@@ -18,7 +18,7 @@ use Validator;
 
 class TimetableController extends Controller
 {
-    private array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    public static array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
     private array $rules = [
         'teacher' => ['required', 'array'],
@@ -140,7 +140,8 @@ class TimetableController extends Controller
         return view('admin.timetableshow', [
             'timetable' => $timetable,
             'timetable_days' => $timetable_days_grouped,
-            'days' => $this->days
+            'days' => $this->days,
+            'is_student' => false
         ]);
     }
 

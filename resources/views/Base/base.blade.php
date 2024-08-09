@@ -56,7 +56,7 @@
         <section id="content">
             @include('Partials.header')
             <main>
-                @include('Partials.main')
+                @yield('content')
             </main>
         </section>
         <footer>
