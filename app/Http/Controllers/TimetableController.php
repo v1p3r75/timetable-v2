@@ -34,7 +34,7 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        return view('admin.timetable', ['timetables' => Timetable::all()]);
+        return view('admin.timetable', ['timetables' => Timetable::all(), 'is_teacher' => false]);
     }
 
     /**

@@ -32,11 +32,15 @@ Route::middleware('guest')->prefix('auth')->group(function () {
 }) ;
 
 Route::delete('auth/logout', [LoginController::class, 'logout'])->middleware('auth')->name('auth.logout');
+
 Route::middleware(['auth','adminDenied'])->group(function (){
-        Route::get('/', [StudentController::class, 'dashboard'])->name('student.dashboard');
+        Route::get('/', [StudentController::class, 'dashboard'])->name('user.dashboard');
         Route::view('faq', 'student.faq')->name('faq.index');
         Route::get('timetable', [StudentController::class, 'show'])->name('student.timetable.index');
+        Route::get('teacher/timetable/{timetable}', [TeacherController::class, 'show'])->name('teacher.timetable.show');
+        Route::get('teacher/timetable', [TeacherController::class, 'timetables'])->name('teacher.timetable.index');
 });
+
 Route::prefix('admin')->middleware(['auth','studentDenied'])->group(function () {
         Route::resource('level', LevelController::class)->except('show');
         Route::resource('subject', SubjectController::class)->except('show');
@@ -48,6 +52,7 @@ Route::prefix('admin')->middleware(['auth','studentDenied'])->group(function () 
         Route::post('student/{student}', [StudentController::class, 'blocked'])->name('student.blocked');
         Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
 });
+
 Route::middleware('auth')->group(function(){
         Route::get('profile/edit', [PasswordController::class, 'edit'])->name('profile.edit');
         Route::put('profile/update', [PasswordController::class, 'update'])->name('profile.update');

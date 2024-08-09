@@ -60,8 +60,8 @@ $route = Route::currentRouteName()
 	</ul>
 	@elseif (Auth::user()->role_id === App\Models\Role::STUDENT)
 	<ul class="side-menu top">
-		<li @class(['', 'active'=> str_starts_with($route , 'student.dash')])>
-			<a href="{{ route("student.index") }}">
+		<li @class(['', 'active'=> str_starts_with($route , 'user.dashboard')])>
+			<a href="{{ route("user.dashboard") }}">
 				<i class='bx bxs-dashboard'></i>
 				<span class="text">Dashboard</span>
 			</a>
@@ -82,14 +82,14 @@ $route = Route::currentRouteName()
 	</ul>
 	@else
 	<ul class="side-menu top">
-		<li @class(['', 'active'=> str_starts_with($route , 'student.dash')])>
-			<a href="/">
+		<li @class(['', 'active'=> str_starts_with($route , 'user.dashboard')])>
+			<a href="{{ route("user.dashboard") }}">
 				<i class='bx bxs-dashboard'></i>
 				<span class="text">Dashboard</span>
 			</a>
 		</li>
-		<li @class(['', 'active'=> $route === 'student.timetable.index'])>
-			<a href="{{ route('student.timetable.index') }}">
+		<li @class(['', 'active'=> str_starts_with($route,'teacher.timetable.index')])>
+			<a href="{{ route('teacher.timetable.index') }}">
 				<i class='bx bxs-calendar'></i>
 				<span class="text">Emplois du Temps</span>
 			</a>

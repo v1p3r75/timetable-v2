@@ -3,9 +3,11 @@
 
 @section('content')
 <div class="margin-update">
-    <div class="d-flex justify-content-end mb-2 align-items-center">
-        <a class='btn btn-primary text-center shadow' href="{{ route('timetable.create') }}">Ajouter</a>
-    </div>
+    @if (!$is_teacher)
+        <div class="d-flex justify-content-end mb-2 align-items-center">
+            <a class='btn btn-primary text-center shadow' href="{{ route('timetable.create') }}">Ajouter</a>
+        </div>
+    @endif
     <div class="table-responsive mt-5 animate__animated animate__zoomIn">
         <table class="table table-striped shadow-sm w-100" id="myTable">
             <thead class="bg-white text-center">
@@ -24,19 +26,25 @@
                     <td>{{ $timetable->level->label}}</td>
                     <td>{{ $timetable->classroom->label}}</td>
                     <td class="">
-                        <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
-                            <a href="{{ route('timetable.show', $timetable) }}" class="btn btn-primary rounded-1 btn-action" title="Voir">
-                                <i class="bx bx-show"></i>
-                            </a>
-                            <a title="Editer" href="{{ route('timetable.edit', $timetable) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>
-                            <button class="btn btn-danger rounded-1 btn-action delete-btn" title="Supprimer">
-                                <i class="bx bx-trash"></i>
-                            </button>
-                        </div>
-                        <form action="{{ route('timetable.destroy', $timetable) }}" method="post" class="delete-form">
-                            @method('delete')
-                            @csrf
-                        </form>
+                        @if (!$is_teacher)
+                            <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
+                                <a href="{{ route('timetable.show', $timetable) }}" class="btn btn-primary rounded-1 btn-action" title="Voir">
+                                    <i class="bx bx-show"></i>
+                                </a>
+                                <a title="Editer" href="{{ route('timetable.edit', $timetable) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>
+                                <button class="btn btn-danger rounded-1 btn-action delete-btn" title="Supprimer">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </div>
+                            <form action="{{ route('timetable.destroy', $timetable) }}" method="post" class="delete-form">
+                                @method('delete')
+                                @csrf
+                            </form>
+
+                        @else
+                            <a href="{{ route('teacher.timetable.show', $timetable)}}" class="btn btn-primary rounded-3">Visualiser</a>
+                        @endif
+                        
                     </td>
                 </tr>
                 @endforeach
