@@ -24,7 +24,6 @@ class ClassroomRequest extends FormRequest
         return [
             'label' => ['required', 'string'],
             'capacity' => ['required', 'integer'],
-            'status' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
         ];
     }

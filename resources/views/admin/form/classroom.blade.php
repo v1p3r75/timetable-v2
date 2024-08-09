@@ -43,8 +43,8 @@
         </div>
     </div>
     <div class="form-check form-switch mt-2">
-        <input type="checkbox" name="status" class="form-check-input " @checked(old('status',$classroom->status)) >
-        <label for="" class="form-check-label"> Disponibilité</label>
+        <input type="checkbox" name="status" id="status" class="form-check-input " @checked(old('status',$classroom->status)) >
+        <label for="status" class="form-check-label"> Disponibilité</label>
     </div>
     <div class="">
         <button class="btn btn-primary shadow mt-4">

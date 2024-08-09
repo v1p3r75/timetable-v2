@@ -21,7 +21,8 @@ class ClassroomController extends Controller
     {
         $classroom = new Classroom();
         $data = $request->validated();
-        $data['status'] = $data['status'] === 'on';
+        $data['status'] = isset($request->status);
+
         $classroom = $classroom->create($data);
 
         toastr()->success("La salle de classe à été créer avec succès !");
@@ -34,6 +35,7 @@ class ClassroomController extends Controller
     public function update(Classroom $classroom, ClassroomRequest $request)
     {
         $data = $request->validated();
+        $data['status'] = isset($request->status);
 
         $classroom = $classroom->update($data);
         toastr()->success("La salle de classe à été mise à jour avec succès !");
