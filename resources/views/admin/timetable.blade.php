@@ -25,9 +25,9 @@
                     <td>{{ $timetable->classroom->label}}</td>
                     <td class="">
                         <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
-                            <button class="btn btn-primary rounded-1 btn-action" title="Voir">
-                                <i class="bx bx-view"></i>
-                            </button>
+                            <a href="{{ route('timetable.show', $timetable) }}" class="btn btn-primary rounded-1 btn-action" title="Voir">
+                                <i class="bx bx-show"></i>
+                            </a>
                             <a title="Editer" href="{{ route('timetable.edit', $timetable) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>
                             <button class="btn btn-danger rounded-1 btn-action delete-btn" title="Supprimer">
                                 <i class="bx bx-trash"></i>

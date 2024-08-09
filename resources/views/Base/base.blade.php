@@ -45,6 +45,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="/css/timetablejs.css">
     <script src="/js/timetable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 
     <title>@yield('title', "Dashboard")</title>
 </head>
@@ -209,7 +210,7 @@
                                 resolve(true);
                             }, 1500)
                         })
-                        
+
                         return toastr.success(response.message);
                     }
 
@@ -223,6 +224,13 @@
 
         if (submit) {
             submit.addEventListener('click', (e) => sendData(e, submit.getAttribute('data-form-type') === "edit"));
+        }
+
+
+        function printDiv() {
+
+            
+
         }
     </script>
 </body>

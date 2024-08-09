@@ -127,9 +127,21 @@ class TimetableController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Timetable $timetable)
+    public function show(Timetable $timetable, TimetableByDay $days)
     {
-        return view('admin.timetableshow', compact('timetable'));
+
+        $timetable_days = $days->where('timetable_id', '=', $timetable->id)->get();
+        $timetable_days_grouped = [];
+
+        foreach ($timetable_days as $timetable_day) {
+            $timetable_days_grouped[$timetable_day->day][] = $timetable_day;
+        }
+        
+        return view('admin.timetableshow', [
+            'timetable' => $timetable,
+            'timetable_days' => $timetable_days_grouped,
+            'days' => $this->days
+        ]);
     }
 
     public function edit(Timetable $timetable, User $user)
@@ -209,8 +221,6 @@ class TimetableController extends Controller
                         'start_time' => $start_time,
                         'end_time' => $end_time,
                     ]);
-                    
-
                 } else { // update an existing timetable
 
                     $result = $days->where(['id' => $timetable_day])->first();
@@ -221,10 +231,7 @@ class TimetableController extends Controller
                         'start_time' => $start_time,
                         'end_time' => $end_time,
                     ]);
-                    
                 }
-                
-
             } catch (Exception $e) {
 
                 return response()->json(['success' => false, 'message' => "Une erreur s'est produite"]);
@@ -233,12 +240,11 @@ class TimetableController extends Controller
 
         // delete timetable
 
-        foreach($request->tasks_to_delete as $task) {
+        foreach ($request->tasks_to_delete as $task) {
 
             if (isset($task)) {
 
                 TimetableByDay::destroy($task);
-                
             }
         }
 

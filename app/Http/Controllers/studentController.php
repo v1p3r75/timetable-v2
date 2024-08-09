@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 
 
@@ -10,7 +11,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = User::query() ;
-        $students->where('role_id', '=', 3);
+        $students->where('role_id', '=', Role::STUDENT);
         return view('admin.student',[ 'students' =>   $students->get()] );
     }
     public function blocked(User $student)

@@ -63,7 +63,7 @@
                                 <div class="row content">
                                     <div class="col-md-6">
                                         <label for="timetableinput" class="mt-2">Heure de début</label>
-                                        <input type="time" id="timetableinput" name="start_time[]" class="form-control @error('start_time') is-invalid @enderror" value="{{ old('start_time', (new DateTime($timetable->start_time))->format('h:i') )}}">
+                                        <input type="time" id="timetableinput" name="start_time[]" class="form-control @error('start_time') is-invalid @enderror" value="{{ old('start_time', (new DateTime($timetable->start_time))->format('H:i') )}}">
                                         <div class="invalid-feedback">
                                             @error('start_time')
                                             {{ $message }}
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="timetableinput" class="mt-2">Heure de fin</label>
-                                        <input type="time" id="timetableinput" name="end_time[]" class="form-control @error('end_time') is-invalid @enderror" value="{{ old('end_time', (new DateTime($timetable->end_time))->format('h:i')) }}">
+                                        <input type="time" id="timetableinput" name="end_time[]" class="form-control @error('end_time') is-invalid @enderror" value="{{ old('end_time', (new DateTime($timetable->end_time))->format('H:i')) }}">
                                         <div class="invalid-feedback">
                                             @error('end_time')
                                             {{ $message }}
