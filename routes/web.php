@@ -37,6 +37,8 @@ Route::middleware(['auth','adminDenied'])->group(function (){
         Route::get('/', [StudentController::class, 'dashboard'])->name('user.dashboard');
         Route::view('faq', 'student.faq')->name('faq.index');
         Route::get('timetable', [StudentController::class, 'show'])->name('student.timetable.index');
+        
+        Route::get('/teacher/dashboard', [TeacherController::class, 'dashboard'])->name('teacher.dashboard');
         Route::get('teacher/timetable/{timetable}', [TeacherController::class, 'show'])->name('teacher.timetable.show');
         Route::get('teacher/timetable', [TeacherController::class, 'timetables'])->name('teacher.timetable.index');
 });

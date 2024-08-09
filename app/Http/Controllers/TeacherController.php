@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Timetable;
 use App\Models\TimetableByDay;
 use App\Models\User;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,16 +27,53 @@ class TeacherController extends Controller
         return view('admin.form.teacher', ['teacher' => new User()]);
     }
 
+    public function dashboard(Timetable $timetable, TimetableByDay $days)
+    {
+
+        $user = Auth::user();
+        $timetable_days = $days->where(['user_id' => $user->id])->get();
+
+        $daysString = TimetableController::$days;
+
+        $totalHours = $timetable_days->reduce(function ($carry, $class) {
+            $startTime = Carbon::parse($class->start_time);
+            $endTime = Carbon::parse($class->end_time);
+            return $carry + $endTime->diffInHours($startTime);
+        }, 0);
+
+        // Calculer le nombre total de cours par semaine
+        $totalClasses = $timetable_days->count();
+
+        // Calculer le nombre d'heures par jour
+        $dayHours = $timetable_days->groupBy('day')->map(function ($dayClasses) {
+            return $dayClasses->reduce(function ($carry, $class) {
+                $startTime = Carbon::parse($class->start_time);
+                $endTime = Carbon::parse($class->end_time);
+                return $carry + $endTime->diffInHours($startTime);
+            }, 0);
+        });
+
+        // Déterminer la journée la plus et la moins chargée
+        $mostBusyDay = $dayHours->sortDesc()->keys()->first();
+        $leastBusyDay = $dayHours->sort()->keys()->first();
+
+        return view('student.dashboard', [
+            'totalHours' => $totalHours,
+            'totalClasses' => $totalClasses,
+            'mostBusyDay' => $daysString[$mostBusyDay],
+            'leastBusyDay' => $daysString[$leastBusyDay]
+        ]);
+    }
+
     public function timetables(Timetable $timetable, TimetableByDay $days)
     {
-    
-        $user = Auth::user();
-        $timetables = $days->where(['user_id' => $user->id])->groupBy('timetable_id')->get()->map(fn($t) => $t->timetable_id);
 
-        $all = $timetables->map(fn($id) => $timetable->where(['id' => $id])->get()->first());
+        $user = Auth::user();
+        $timetables = $days->where(['user_id' => $user->id])->groupBy('timetable_id')->get()->map(fn ($t) => $t->timetable_id);
+
+        $all = $timetables->map(fn ($id) => $timetable->where(['id' => $id])->get()->first());
 
         return view('admin.timetable', ['timetables' => $all, 'is_teacher' => true]);
-
     }
 
     public function show(Timetable $timetable, TimetableByDay $days)
@@ -82,7 +120,7 @@ class TeacherController extends Controller
     {
         return view('admin.form.teacher', ['teacher' => $teacher]);
     }
-    
+
     public function update(User $teacher, TeacherUpdateRequest $request)
     {
 

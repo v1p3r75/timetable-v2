@@ -42,7 +42,7 @@ class LoginController extends Controller
 
                 } else if ($user->role_id === Role::TEACHER) {
                     
-                    return redirect()->intended(RouteServiceProvider::STUDENT);
+                    return redirect()->intended(RouteServiceProvider::TEACHER);
                 } else {
                     
                     return redirect()->intended(RouteServiceProvider::STUDENT);

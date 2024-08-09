@@ -82,8 +82,8 @@ $route = Route::currentRouteName()
 	</ul>
 	@else
 	<ul class="side-menu top">
-		<li @class(['', 'active'=> str_starts_with($route , 'user.dashboard')])>
-			<a href="{{ route("user.dashboard") }}">
+		<li @class(['', 'active'=> str_starts_with($route , 'teacher.dashboard')])>
+			<a href="{{ route("teacher.dashboard") }}">
 				<i class='bx bxs-dashboard'></i>
 				<span class="text">Dashboard</span>
 			</a>

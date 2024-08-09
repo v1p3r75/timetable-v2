@@ -8,7 +8,7 @@
     <div class="row row-cols-2 justify-content-between">
         <div class="info align-self-center">
             <h6 class="text-muted">Cours cette semaine</h6>
-            <h5>{{ $totalClasses }}h</h5>
+            <h5>{{ $totalClasses }}</h5>
         </div>
         <div>
             <div class="card-img p-2 text-center">
