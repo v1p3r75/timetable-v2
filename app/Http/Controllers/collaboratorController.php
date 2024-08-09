@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CollaboratorRequest;
 use App\Http\Requests\CollaboratorUpdateRequest;
-use App\Http\Requests\TeacherRequest;
-use App\Http\Requests\TeacherUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use Hash;
-use Illuminate\Http\Request;
 use Str;
 
 class CollaboratorController extends Controller
