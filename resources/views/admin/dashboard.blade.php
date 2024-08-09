@@ -3,4 +3,6 @@
 
  @section('content') 
  
+ Ok
+ 
  @endsection

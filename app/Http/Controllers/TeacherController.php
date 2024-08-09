@@ -33,7 +33,7 @@ class TeacherController extends Controller
         $user = Auth::user();
         $timetable_days = $days->where(['user_id' => $user->id])->get();
 
-        $daysString = TimetableController::$days;
+        $daysString = TimetableByDay::$days;
 
         $totalHours = $timetable_days->reduce(function ($carry, $class) {
             $startTime = Carbon::parse($class->start_time);
@@ -93,7 +93,7 @@ class TeacherController extends Controller
         return view('admin.timetableshow', [
             'timetable' => $timetable,
             'timetable_days' => $timetable_days_grouped,
-            'days' => TimetableController::$days,
+            'days' => TimetableByDay::$days,
             'is_student' => false
         ]);
     }

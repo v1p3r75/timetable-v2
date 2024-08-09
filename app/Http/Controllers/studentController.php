@@ -26,7 +26,7 @@ class StudentController extends Controller
         $user = Auth::user();
 
         $search = $timetable->where(['level_id' => $user->level_id])->get()->first();
-        $daysString = TimetableController::$days;
+        $daysString = TimetableByDay::$days;
 
         if ($search) {
 
@@ -89,7 +89,7 @@ class StudentController extends Controller
         return view('admin.timetableshow', [
             'timetable' => $timetable,
             'timetable_days' => $timetable_days_grouped,
-            'days' => TimetableController::$days,
+            'days' => TimetableByDay::$days,
             'is_student' => true
         ]);
     }

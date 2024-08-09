@@ -28,5 +28,7 @@ class TimetableByDay extends Model
     }
 
     protected $fillable = ['day', 'user_id', 'start_time', 'end_time', 'timetable_id', 'subject_id'];
+
+    public static $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
     
 }

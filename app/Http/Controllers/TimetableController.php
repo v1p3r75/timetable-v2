@@ -18,7 +18,6 @@ use Validator;
 
 class TimetableController extends Controller
 {
-    public static array $days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
     private array $rules = [
         'teacher' => ['required', 'array'],
@@ -63,7 +62,7 @@ class TimetableController extends Controller
             'classrooms' => $classrooms_not_programmed,
             'levels' => $levels_not_programmed,
             'subjects' => Subject::all(),
-            'days' => $this->days
+            'days' => TimetableByDay::$days
         ]);
     }
 
@@ -88,7 +87,7 @@ class TimetableController extends Controller
 
             if (!isset($request->teacher[$key], $request->subject[$key], $request->start_time[$key], $request->end_time[$key])) {
 
-                return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . $this->days[$day]]);
+                return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . TimetableByDay::$days[$day]]);
             }
 
             try {
@@ -100,7 +99,7 @@ class TimetableController extends Controller
 
                     return response()->json([
                         'success' => false,
-                        'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", $this->days[$day], $request->end_time[$key], $request->start_time[$key])
+                        'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", TimetableByDay::$days[$day], $request->end_time[$key], $request->start_time[$key])
                     ]);
                 }
                 // if ($days->where(['day' => $key]))
@@ -140,7 +139,7 @@ class TimetableController extends Controller
         return view('admin.timetableshow', [
             'timetable' => $timetable,
             'timetable_days' => $timetable_days_grouped,
-            'days' => $this->days,
+            'days' => TimetableByDay::$days,
             'is_student' => false
         ]);
     }
@@ -156,7 +155,7 @@ class TimetableController extends Controller
             'classrooms' => Classroom::all(),
             'levels' => Level::all(),
             'subjects' => Subject::all(),
-            'days' => $this->days
+            'days' => TimetableByDay::$days
         ]);
     }
     public function update(Timetable $timetable, Request $request, TimetableByDay $days)
@@ -191,7 +190,7 @@ class TimetableController extends Controller
 
             if (!isset($request->teacher[$key], $request->subject[$key], $request->start_time[$key], $request->end_time[$key])) {
 
-                return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . $this->days[$day]]);
+                return response()->json(['success' => false, 'message' => "Vérfier si tous les champs sont remplis pour " . TimetableByDay::$days[$day]]);
             }
         }
 
@@ -206,7 +205,7 @@ class TimetableController extends Controller
 
                     return response()->json([
                         'success' => false,
-                        'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", $this->days[$day], $request->end_time[$key], $request->start_time[$key])
+                        'message' => sprintf("%s : La date de fin (%s) ne pas être inférieur à la date de début (%s)", TimetableByDay::$days[$day], $request->end_time[$key], $request->start_time[$key])
                     ]);
                 }
 
