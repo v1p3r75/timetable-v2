@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PasswordController;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +53,7 @@ Route::prefix('admin')->middleware(['auth','studentDenied'])->group(function () 
         Route::resource('collaborator', CollaboratorController::class)->except('show');
         Route::get('student', [StudentController::class, 'index'])->name('student.index');
         Route::post('student/{student}', [StudentController::class, 'blocked'])->name('student.blocked');
-        Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 Route::middleware('auth')->group(function(){
