@@ -23,6 +23,7 @@ class CollaboratorController extends Controller
     }
     public function store(CollaboratorRequest $request)
     {
+        $code = Str::random(8);
         $collaborator = new User();
         $collaborator = $collaborator->create([
             'firstname' => $request->firstname,
@@ -31,12 +32,16 @@ class CollaboratorController extends Controller
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
             'role_id' => Role::DEPUTY_CENSOR,
-            'password' => Hash::make(Str::random(8)),
+            'password' => Hash::make($code),
         ]);
+
 
         /* envoyer un mail au collaborateur pour quil met a jour son compte */
 
         toastr()->success("Le collaborateur à été créer avec succès !");
+        
+        $this->send_account_created_email($collaborator, $code);
+
         return redirect()->route('collaborator.index');
     }
     public function edit(User $collaborator)

@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Campustimes'),
+    'name' => env('APP_NAME', 'LTN-Emploi'),
 
     /*
     |--------------------------------------------------------------------------

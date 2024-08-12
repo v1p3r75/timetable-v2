@@ -60,8 +60,8 @@ class TeacherController extends Controller
         return view('student.dashboard', [
             'totalHours' => $totalHours,
             'totalClasses' => $totalClasses,
-            'mostBusyDay' => $daysString[$mostBusyDay],
-            'leastBusyDay' => $daysString[$leastBusyDay]
+            'mostBusyDay' => $mostBusyDay ? $daysString[$mostBusyDay] : "-",
+            'leastBusyDay' => $leastBusyDay ? $daysString[$leastBusyDay] : "-"
         ]);
     }
 
@@ -101,6 +101,7 @@ class TeacherController extends Controller
 
     public function store(TeacherRequest $request)
     {
+        $code = Str::random(8);
         $teacher = new User();
         $teacher = $teacher->create([
             'firstname' => $request->firstname,
@@ -109,11 +110,13 @@ class TeacherController extends Controller
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
             'role_id' => Role::TEACHER,
-            'password' => Hash::make(Str::random(8)),
+            'password' => Hash::make($code),
         ]);
 
-        /* envoyer un mail au proffesseur pour quil met a jour son compte */
-        toastr()->success("Le proffesseur à été créer avec succès !");
+        toastr()->success("Le proffesseur a été crée avec succès !");
+
+        $this->send_account_created_email($teacher, $code);
+
         return redirect()->route('teacher.index');
     }
     public function edit(User $teacher)
