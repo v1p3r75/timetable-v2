@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="http://localhost/bootstrap/dist/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="manifest" href="{{ asset('/public/manifest.json') }}">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    {{-- <link rel="manifest" href="{{ asset('/public/manifest.json') }}"> --}}
     <meta name="theme-color" content="#3c91e6">
     <!-- Safari on iOS -->
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -25,7 +25,8 @@
     <meta name="msapplication-navbutton-color" content="#3c91e6">
     <link rel="stylesheet" href="http://localhost/fontawesome/css/all.min.css">
     <script src="http://localhost/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="/css/app.css">
     <title>@yield('title', "Inscription")</title>
 </head>
 <body>

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Campustimes'
+const CACHE_NAME = 'timetable-cache'
 const OFFLINE_URL = '/public/offline.html'
 
 

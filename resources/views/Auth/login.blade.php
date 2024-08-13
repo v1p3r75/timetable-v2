@@ -5,7 +5,7 @@
     <div class="container  ">
         <div class="row shadow">
             <div class=" col-md-6 p-none none">
-                <img src="{{ asset('/storage/image/cover.jpg') }}" class="cover_login" alt="">
+                <img src="/login.png" class="cover_login" alt="login">
             </div>
             <div class="col-md-6  p-none">
                 <form action="" method="post" class="p-5 custom-p bg-white h-100">
@@ -15,7 +15,7 @@
                                 alt=""></div>
                     </div>
                     <div class="entete">
-                        <h3 class="fw-medium ">Bienvenu sur Campustimes</h3>
+                        <h3 class="fw-medium ">Bienvenu sur LTN-Emploi</h3>
                         <span class="colorize">Besoin d'un compte ?</span>
                         <span><a href="{{ route('auth.register') }}">Créer un compte</a></span>
                         <h4 class="mt-3 mb-3">Se connecter</h4>

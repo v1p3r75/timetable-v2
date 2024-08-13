@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Le projet CAMPUSTIMES est une application capable de gérer la planification des emplois du temps pour les administrateurs, étudiants et professeurs.">
+    <meta name="description" content="Le projet LTN-Emploi est une application capable de gérer la planification des emplois du temps pour les administrateurs, étudiants et professeurs.">
     <meta name="robots" content="index, follow">
     <meta name="author" content="LAWINGNI Abdoul Rachard">
     <meta name="theme-color" content="#3c91e6">
