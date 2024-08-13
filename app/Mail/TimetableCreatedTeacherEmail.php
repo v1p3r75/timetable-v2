@@ -9,16 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TimetableCreated extends Mailable
+class TimetableCreatedTeacherEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        private array $fullname,
+        private array $subjects,
+        private array $level,
+    ) {
     }
 
     /**
@@ -37,7 +39,11 @@ class TimetableCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.timetable_created_teacher',
+            with: [
+                'subjects' => $this->subjects,
+                'fullname' => $this->fullname,
+            ]
         );
     }
 

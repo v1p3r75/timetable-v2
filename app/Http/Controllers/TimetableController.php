@@ -10,6 +10,7 @@ use App\Models\Subject;
 use App\Models\Timetable;
 use App\Models\TimetableByDay;
 use App\Models\User;
+use Auth;
 use DateTime;
 use DB;
 use Exception;
@@ -83,6 +84,8 @@ class TimetableController extends Controller
         $timetable->level_id = $request->level;
         $timetable->save();
 
+        $result = [];
+
         foreach ($request->day as $key => $day) {
 
             if (!isset($request->teacher[$key], $request->subject[$key], $request->start_time[$key], $request->end_time[$key])) {
@@ -104,7 +107,7 @@ class TimetableController extends Controller
                 }
                 // if ($days->where(['day' => $key]))
 
-                $days->insert([
+                $result = $days->insert([
                     'day' => $day,
                     'timetable_id' => $timetable->id,
                     'user_id' => $request->teacher[$key],
@@ -119,6 +122,8 @@ class TimetableController extends Controller
         }
 
         DB::commit();
+
+        // $this->send_timetable_email($timetable);
 
         return response()->json(['success' => true, 'message' => "Emploi du temps crée avec succés"]);
     }

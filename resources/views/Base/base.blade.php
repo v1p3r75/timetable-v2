@@ -26,8 +26,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#3c91e6">
-    <link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    <link rel="icon" href='/favicon.ico' type="image/x-icon">
+    <link rel="manifest" href="/manifest.json">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     {{-- <link rel="stylesheet" href="http://localhost/bootstrap/dist/css/bootstrap.min.css"> --}}
@@ -42,7 +42,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/timetablejs.css">
     <script src="/js/timetable.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
@@ -63,7 +64,8 @@
             @include('Partials.footer')
         </footer>
     </div>
-    @vite('resources/js/app.js')
+    {{-- @vite('resources/js/app.js') --}}
+    <script src="/js/app.js"></script>
     @yield('scripts')
     <script>
         $(document).ready(function() {
