@@ -36,7 +36,7 @@ $route = Route::currentRouteName()
 		<li @class(['', 'active'=> str_starts_with($route , 'student.')])>
 			<a href="{{ route('student.index') }}">
 				<i class='bx bxs-group'></i>
-				<span class="text">Etudiants</span>
+				<span class="text">Elèves</span>
 			</a>
 		</li>
 		<li @class(['', 'active'=> str_starts_with($route , 'subject.')])>
