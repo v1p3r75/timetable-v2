@@ -201,10 +201,9 @@
                     headers: {
                         'Accept': 'application/json'
                     }
-                }).then(response => response.text())
+                }).then(response => response.json())
                 .then(response => {
 
-                    console.log(response);
                     if (response.success) {
 
                         new Promise((resolve, reject) => {
