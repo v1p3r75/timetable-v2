@@ -201,9 +201,10 @@
                     headers: {
                         'Accept': 'application/json'
                     }
-                }).then(response => response.json())
+                }).then(response => response.text())
                 .then(response => {
 
+                    console.log(response);
                     if (response.success) {
 
                         new Promise((resolve, reject) => {
@@ -218,7 +219,7 @@
 
                     return toastr.error(response.message);
                 })
-                .catch(error => console.error('e', error))
+                .catch(error => console.error(error));
 
         }
 

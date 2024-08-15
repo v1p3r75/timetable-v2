@@ -38,7 +38,7 @@ class LoginController extends Controller
                 
                 if (in_array($user->role_id, [Role::CENSOR, Role::DEPUTY_CENSOR])) {
 
-                    return redirect()->intended(RouteServiceProvider::HOME);
+                    return redirect()->intended(RouteServiceProvider::ADMIN);
 
                 } else if ($user->role_id === Role::TEACHER) {
                     

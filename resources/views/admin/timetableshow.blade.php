@@ -3,9 +3,9 @@
 
  @section('content')
  <div class="print">
+  @if($timetable_days)
   <h6 class="d-flex align-items-center justify-content-center mt-3 my-5 text-muted">Emploi de la classe {{ $timetable->level->label }}</h6>
   <div>
-    @if($timetable_days)
       <div class="table-responsive">
         <table class="table table-default table-bordered">
           <thead>

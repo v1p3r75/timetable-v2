@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Role;
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +25,12 @@ class DeniedForStudent
                 
                 return $next($request); // Permet l'accès aux administrateurs (role_id = 1)
             }
-            return redirect('/'); // Redirige tous les autres utilisateurs vers la page d'accueil
+            if (Auth::user()->role_id == Role::TEACHER) {
+
+                return redirect(RouteServiceProvider::TEACHER);
+            }
+
+            return redirect(RouteServiceProvider::STUDENT); // Redirige tous les autres utilisateurs vers la page d'accueil
 
         }
 
