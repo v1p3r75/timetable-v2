@@ -83,7 +83,7 @@
             </label>
         </div>
         <div class="col-md-4">
-            <label for="sex" class="form-label mb-1 w-100 text-muted position-relative">Sexe</label>
+            <label for="sex" class="form-label mb-0 w-100 text-muted position-relative">Sexe</label>
             <select id="timetableinput" name="sex" class="form-control @error('sex') is-invalid @enderror">
                 <option value="">Choisir le sexe</option>
                 @foreach(['M' => 'Masculin', 'F' => 'Féminin'] as $key => $item)
