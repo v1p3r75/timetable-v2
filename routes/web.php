@@ -53,6 +53,7 @@ Route::prefix('admin')->middleware(['auth','studentDenied'])->group(function () 
         Route::resource('collaborator', CollaboratorController::class)->except('show');
         Route::get('student', [StudentController::class, 'index'])->name('student.index');
         Route::post('student/{student}', [StudentController::class, 'blocked'])->name('student.blocked');
+        Route::delete('student/delete/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
 

@@ -113,7 +113,7 @@ class TeacherController extends Controller
             'password' => Hash::make($code),
         ]);
 
-        toastr()->success("Le proffesseur a été crée avec succès !");
+        toastr()->success("Le professeur a été crée avec succès !");
 
         $this->send_account_created_email($teacher, $code);
 
@@ -136,13 +136,13 @@ class TeacherController extends Controller
             'role_id' => Role::TEACHER,
 
         ]);
-        toastr()->success("Le proffesseur à été mise à jour avec succès !");
+        toastr()->success("Le professeur à été mise à jour avec succès !");
         return redirect()->route('teacher.index');
     }
     public function destroy(User $teacher)
     {
         $teacher = $teacher->delete();
-        toastr()->success("Le proffesseur à été supprimer avec succès  !");
+        toastr()->success("Le professeur à été supprimer avec succès  !");
         return redirect()->route('teacher.index');
     }
 }

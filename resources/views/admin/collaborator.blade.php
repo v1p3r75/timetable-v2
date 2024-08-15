@@ -16,6 +16,7 @@
                     <th>Matricule</th>
                     <th>Phone</th>
                     <th>Email</th>
+                    <th>Sexe</th>
                     <th class="">Actions</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                     <td>{{ $collaborator->serial_number }}</td>
                     <td>{{ $collaborator->phone }}</td>
                     <td>{{ $collaborator->email }}</td>
+                    <td>{{ $collaborator->sex === "M" ? "Masculin" : "Féminin" }}</td>
                     <td>
                         <div class="d-flex justify-content-center align-items-center gap-1 ">
                             <a href="{{ route('collaborator.edit', $collaborator) }}" class="btn btn-primary rounded-1 text-light btn-action"><i class="bx bx-edit"></i></a>

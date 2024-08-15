@@ -31,12 +31,11 @@ class CollaboratorController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
+            'sex' => $request->sex,
             'role_id' => Role::DEPUTY_CENSOR,
             'password' => Hash::make($code),
         ]);
 
-
-        /* envoyer un mail au collaborateur pour quil met a jour son compte */
 
         toastr()->success("Le collaborateur à été créer avec succès !");
         
@@ -55,6 +54,7 @@ class CollaboratorController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'phone' => $request->phone,
+            'sex' => $request->sex,
             'serial_number' => $request->serial_number,
             'role_id' => Role::DEPUTY_CENSOR,
 

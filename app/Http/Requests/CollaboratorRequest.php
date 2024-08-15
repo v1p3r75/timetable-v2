@@ -27,6 +27,7 @@ class CollaboratorRequest extends FormRequest
             'email' => ['required','email', 'unique:users,email'],
             'phone' => ['required', 'unique:users,phone'],
             'serial_number' => ["nullable", 'unique:users,serial_number'],
+            'sex' => ["required"],
         ];
     }
 }

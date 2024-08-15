@@ -66,26 +66,44 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-md-12 form-group">
-                        <label for="classe" class="form-label w-100 mb-1 text-muted position-relative" >Classe
-                        <select name="level_id" id="classe" class="mb-2 form-control input-custom @error('level_id') is-invalid @enderror">
-                            <option value="">Selectioner  classe</option>
-                            @foreach ($levels as $level)
-                                <option value="{{$level->id}}"> {{ $level->label }}</option>
-                            @endforeach
-                        </select>
-                        <span class="position-absolute position-custom "><i class="bx  bxs-chevron-down"></i></span>
-                        </label>
-                        @error('level_id')
-                            <div class="invalid-feedback">
-                                {{ $message}}
-                            </div>
-                        @enderror
-                    </div>
                     
                 </div>
-                <div class="row ">
+                <div class="row">
                     <div class="col-md-6 form-group">
+                         <label for="classe" class="form-label w-100 mb-1 text-muted position-relative" >Classe
+                         <select name="level_id" id="classe" class="mb-2 form-control input-custom @error('level_id') is-invalid @enderror">
+                             <option value="">Selectioner  classe</option>
+                             @foreach ($levels as $level)
+                                 <option value="{{$level->id}}"> {{ $level->label }}</option>
+                             @endforeach
+                         </select>
+                         <span class="position-absolute position-custom "><i class="bx  bxs-chevron-down"></i></span>
+                         </label>
+                         @error('level_id')
+                             <div class="invalid-feedback">
+                                 {{ $message}}
+                             </div>
+                         @enderror
+                     </div> 
+                     <div class="col-md-6 form-group">
+                         <label for="classe" class="form-label w-100 mb-1 text-muted position-relative" >Sexe
+                         <select name="sex" id="classe" class="mb-2 form-control input-custom @error('sex') is-invalid @enderror">
+                             <option value="">Selectioner le sexe</option>
+                             @foreach (['M' => 'Masculin', 'F' => 'Féminin'] as $key => $item)
+                                 <option value="{{$key}}"> {{ $item }}</option>
+                             @endforeach
+                         </select>
+                         <span class="position-absolute position-custom "><i class="bx bxs-chevron-down"></i></span>
+                         </label>
+                         @error('sex')
+                             <div class="invalid-feedback">
+                                 {{ $message}}
+                             </div>
+                         @enderror
+                     </div> 
+                 </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <label for="password" class=" form-label w-100 mb-1 text-muted position-relative">Mot de passe
                             <input type="password" name="password" class="mb-2 form-control input-custom @error('password') is-invalid @enderror">
                         <span class="position-absolute position-custom "><i class="bx bxs-show"></i></span>
@@ -96,7 +114,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-6">
                         <label for="classe" class="form-label w-100 mb-1 text-muted position-relative" >Confirmer mot de passe
                         <input name="password_confirmation" type="password" id="classe" class="mb-2 form-control input-custom @error('password_confirm') is-invalid @enderror">
                         <span class="position-absolute position-custom "><i class="bx bxs-show"></i></span>    

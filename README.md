@@ -18,9 +18,9 @@ Le projet campustimes est un projet qui consiste à déployer une application ca
 
 ![Dashboard Admin Screenshot](./docs/dash.png)
 
-### Dashboard (Étudiant)
+### Dashboard (élève)
 
-![Dashboard Étudiant Screenshot](./docs/user-dashboard.png)
+![Dashboard élève Screenshot](./docs/user-dashboard.png)
 
 ### Dashboard (Professeur)
 

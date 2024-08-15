@@ -30,6 +30,7 @@ class PasswordController extends Controller
             'lastname' => ['nullable', 'string', 'min:2'],
             'email' => ['nullable', 'email', 'unique:users,email,' . $user->id],
             'profil' => ['nullable', 'image'],
+            'sex' => ['required'],
             'phone' => ['nullable']
         ]);
     

@@ -28,6 +28,7 @@ class RegisterRequest extends FormRequest
             'phone' => ['required', 'unique:users,phone'],
             'password' => ['required', 'min:5', 'confirmed'],
             'level_id' => ['required'],
+            'sex' => ['required'],
             'password_confirmation' => ['required']
         ];
     }

@@ -26,6 +26,7 @@ class CollaboratorUpdateRequest extends FormRequest
             'lastname' => ['required' , 'min:3' , 'string'],
             'email' => ['required','email'],
             'phone' => ['required'],
+            'sex' => ['required'],
             'serial_number' => ["nullable"],
         ];
     }

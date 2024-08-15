@@ -1,5 +1,5 @@
 
-- Envoie des mail lors de la creation d'un proffesseur ou d'un collaborateur par l'admin 
-- envoie de mail a tout les etudiant et proffesseur concerner lors de la creation d'un emplois du temps 
+- Envoie des mail lors de la creation d'un professeur ou d'un collaborateur par l'admin 
+- envoie de mail a tout les etudiant et professeur concerner lors de la creation d'un emplois du temps 
 - mot de passe oublier
 - bien faire les emplois du temps 

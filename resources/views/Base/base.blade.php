@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Le projet LTN-Emploi est une application capable de gérer la planification des emplois du temps pour les administrateurs, étudiants et professeurs.">
+    <meta name="description" content="Le projet LTN-Emploi est une application capable de gérer la planification des emplois du temps pour les administrateurs, élèves et professeurs.">
     <meta name="robots" content="index, follow">
     <meta name="author" content="LAWINGNI Abdoul Rachard">
     <meta name="theme-color" content="#3c91e6">
@@ -81,7 +81,7 @@
                         fill: false, // Pas de remplissage sous la ligne
                     },
                     {
-                        label: 'Étudiants',
+                        label: 'élèves',
                         data: [5, 6, 7, 8, 9],
                         borderColor: '#3D5EE1', // Couleur de la ligne
                         backgroundColor: '#3D5EE1', // Couleur de fond
@@ -102,7 +102,7 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: "Comparaison du nombre d'enseignants, de cours et d'étudiants"
+                    text: "Comparaison du nombre d'enseignants, de cours et d'élèves"
                 },
                 scales: {
                     y: {

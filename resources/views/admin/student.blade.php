@@ -1,5 +1,5 @@
 @extends('Base.base')
- @section('title') Les étudiants @endsection
+ @section('title') Les élèves @endsection
 
  @section('content') 
  <div class="margin-update">
@@ -12,6 +12,7 @@
                 <th>Prénom(s)</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Sexe</th>
                 <th class="">Actions</th>
             </tr>
         </thead>
@@ -24,19 +25,25 @@
                 <td>{{ $student->firstname }}</td>
                 <td>{{ $student->phone }}</td>
                 <td>{{ $student->email }}</td>
+                <td>{{ $student->sex === "M" ? "Masculin" : "Féminin" }}</td>
                 <td>
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
-                        <div>
+                            <form action="{{ route('student.destroy', $student) }}" method="post" class="delete-form">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger rounded-1 btn-action delete-btn p-3">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </form>
                             <form action="{{ route('student.blocked', $student) }}" method="post">
                                 @csrf
                                 
                                 @if ($student->blocked)
-                                <button class="btn btn-danger rounded-1"><i class="bx bxs-lock "></i></button>
+                                <button class="btn btn-danger rounded-1"><i class="bx bxs-lock"></i></button>
                                 @else
-                                <button class="btn btn-primary"><i class="bx  bxs-lock-open"></i></button>
+                                <button class="btn btn-primary"><i class="bx bxs-lock-open"></i></button>
                                 @endif
                             </form>
-                        </div>
                     </div>
                 </td>
             </tr>

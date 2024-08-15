@@ -1,5 +1,5 @@
 @extends('Base.base')
- @section('title') Les proffesseurs @endsection
+ @section('title') Les professeurs @endsection
 
  @section('content') 
  <div class="margin-update">
@@ -16,6 +16,7 @@
                 <th>Matricule</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Sexe</th>
                 <th class="">Actions</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{ $teacher->serial_number }}</td>
                 <td>{{ $teacher->phone }}</td>
                 <td>{{ $teacher->email }}</td>
+                <td>{{ $teacher->sex === "M" ? "Masculin" : "Féminin" }}</td>
                 <td class="">
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
                         <a href="{{ route('teacher.edit', $teacher) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>

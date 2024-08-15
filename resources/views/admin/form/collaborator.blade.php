@@ -31,8 +31,8 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-md-4">
+    <div class="row my-3">
+        <div class="col-md-6">
             <label for="collaboratorinput" class="mt-2">Email</label>
             <input type="email" id="collaboratorinput" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$collaborator->email) }}">
             <div class="invalid-feedback">
@@ -41,7 +41,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="collaboratorinput" class="mt-2">Phone</label>
             <input type="text" id="collaboratorinput" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$collaborator->phone) }}">
             <div class="invalid-feedback">
@@ -50,11 +50,28 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-4">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <label for="collaboratorinput" class="mt-2">Matricule</label>
             <input type="text" id="collaboratorinput" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" value="{{ old('serial_number',$collaborator->serial_number) }}">
             <div class="invalid-feedback">
                 @error('serail_number')
+                {{ $message }}
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="collaboratorinput" class="mt-2">Sexe</label>
+            <select id="timetableinput" name="sex" class="form-control @error('sex') is-invalid @enderror">
+                <option value="">Choisir le sexe</option>
+                @foreach(['M' => 'Masculin', 'F' => 'Féminin'] as $key => $item)
+                <option value="{{ $key }}" @selected(old('sex', $collaborator->sex ===
+                    $key))>{{ $item }}</option>
+                @endforeach
+            </select>
+            <div class="invalid-feedback">
+                @error('sex')
                 {{ $message }}
                 @enderror
             </div>

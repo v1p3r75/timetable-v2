@@ -1,14 +1,14 @@
 @extends('Base.base')
-@section('title', $teacher->exists ? "Modifier un proffesseur" : "Créer un proffesseur") 
+@section('title', $teacher->exists ? "Modifier un professeur" : "Créer un professeur") 
 @section('content')
     <form action="{{ route($teacher->exists ? 'teacher.update' : 'teacher.store' , $teacher) }}" method="post" class="p-4 margin-update">
         @method($teacher->exists ? 'PATCH' : 'POST')
         @csrf
         <h5 class="">
             @if ($teacher->exists)
-            Modifier un proffesseur
+            Modifier un professeur
          @else
-            Créer un proffesseur
+            Créer un professeur
          @endif
         </h5>
         <div class="row ">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="row my-4">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="teacherinput" class="mt-2">Email</label>
                 <input type="email" id="teacherinput" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$teacher->email) }}">
                 <div class="invalid-feedback">
@@ -41,7 +41,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="teacherinput" class="mt-2">Phone</label>
                 <input type="text" id="teacherinput" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone',$teacher->phone) }}">
                 <div class="invalid-feedback">
@@ -50,11 +50,28 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <label for="teacherinput" class="mt-2">Matricule</label>
                 <input type="text" id="teacherinput" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" value="{{ old('serial_number',$teacher->serial_number) }}">
                 <div class="invalid-feedback">
                     @error('serial_number')
+                       {{ $message }} 
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="teacherinput" class="mt-2">Sexe</label>
+                <select id="timetableinput" name="sex" class="form-control @error('classroom') is-invalid @enderror">
+                    <option value="">Choisir le sexe</option>
+                    @foreach(['M' => 'Masculin', 'F' => 'Féminin'] as $key => $item)
+                    <option value="{{ $key }}" @selected(old('sex', $teacher->sex ===
+                        $key))>{{ $item }}</option>
+                    @endforeach
+                </select>                
+                <div class="invalid-feedback">
+                    @error('sex')
                        {{ $message }} 
                     @enderror
                 </div>

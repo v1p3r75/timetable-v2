@@ -4,7 +4,7 @@ $route = Route::currentRouteName()
 <section id="sidebar">
 	<a href="#" class="brand">
 		<i class='bx bxs-book'></i>
-		<span class="text">LT-Natitingou</span>
+		<span class="text">LTN-Emploi</span>
 	</a>
 	@if(in_array(Auth::user()->role_id, [App\Models\Role::CENSOR, App\Models\Role::DEPUTY_CENSOR]))
 	<ul class="side-menu top">

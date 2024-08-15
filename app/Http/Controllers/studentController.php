@@ -98,13 +98,20 @@ class StudentController extends Controller
         if ($student->isblocked()) {
             $student->blocked = false;
             $student->save();
-            toastr()->success("L'étudiant à été débloquer avec success");
+            toastr()->success("L'élève est débloqué avec succès");
         } else {
             $student->blocked = true;
             $student->save();
-            toastr()->success("L'étudiant à été bloquer avec success");
+            toastr()->success("L'élève est bloqué avec succès");
         }
 
+        return redirect()->route('student.index');
+    }
+
+    public function destroy(User $student)
+    {
+        $student->delete();
+        toastr()->success("L'éleve à été supprimé avec succès !");
         return redirect()->route('student.index');
     }
 }
