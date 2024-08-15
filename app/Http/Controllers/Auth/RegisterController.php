@@ -29,6 +29,7 @@ class RegisterController extends Controller
             'phone' => $request->phone,
             'level_id' => $request->level_id,
             'sex' => $request->sex,
+            'birthday' => $request->birthday,
             'role_id' => Role::STUDENT,
             'password' => Hash::make($request->password),
         ]);

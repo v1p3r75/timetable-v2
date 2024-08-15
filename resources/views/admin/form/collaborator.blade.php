@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="collaboratorinput" class="mt-2">Matricule</label>
             <input type="text" id="collaboratorinput" name="serial_number" class="form-control @error('serial_number') is-invalid @enderror" value="{{ old('serial_number',$collaborator->serial_number) }}">
             <div class="invalid-feedback">
@@ -61,7 +61,7 @@
                 @enderror
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="collaboratorinput" class="mt-2">Sexe</label>
             <select id="timetableinput" name="sex" class="form-control @error('sex') is-invalid @enderror">
                 <option value="">Choisir le sexe</option>
@@ -75,6 +75,15 @@
                 {{ $message }}
                 @enderror
             </div>
+        </div>
+        <div class="col-md-4 form-group">
+            <label for="birthday" class="mt-2">Date de naissance</label>
+            <input type="date" name="birthday" class="mb-2 form-control input-custom @error('birthday') is-invalid @enderror" {{ old('birthday',$collaborator->birthday) }}>
+            @error('birthday')
+                <div class="invalid-feedback">
+                    {{ $message}}
+                </div>
+            @enderror
         </div>
     </div>
     <div class="">

@@ -10,9 +10,11 @@
                 <th>Profile</th>
                 <th>Nom</th>
                 <th>Prénom(s)</th>
+                <th>Matricule</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Sexe</th>
+                <th>Naissance</th>
                 <th class="">Actions</th>
             </tr>
         </thead>
@@ -23,9 +25,11 @@
                 <td><img src="{{ $student->storageUrl() }}" alt="" style="width: width: 36px;height: 36px;object-fit: cover;border-radius: 50%; "></td>
                 <td>{{ $student->lastname }}</td>
                 <td>{{ $student->firstname }}</td>
+                <td>{{ $student->serial_number }}</td>
                 <td>{{ $student->phone }}</td>
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->sex === "M" ? "Masculin" : "Féminin" }}</td>
+                <td>{{ $student->birthday ? (new DateTime($student->birthday))->format('d/m/Y') : "" }}</td>
                 <td>
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
                             <form action="{{ route('student.destroy', $student) }}" method="post" class="delete-form">

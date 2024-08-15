@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="email" class=" form-label mb-1 w-100 text-muted position-relative">Email
                 <input type="email" name="email" class="mb-2 form-control input-customs"
                     value="{{ old('email', auth()->user()->email) }}">
@@ -66,15 +66,24 @@
                 @enderror
             </label>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="email" class=" form-label mb-1 w-100 text-muted position-relative">Telephone
                 <input type="text" name="phone" class="mb-2 form-control input-customs"
                     value="{{ old('phone', auth()->user()->phone) }}">
                 <span class="position-absolute position-custom-2"><i class="bx bxs-phone"></i></span>
             </label>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-4">
-            <label for="sex" class=" form-label mb-1 w-100 text-muted position-relative">Sexe</label>
+            <label for="serial_number" class=" form-label mb-1 w-100 text-muted position-relative">Matricule
+                <input type="text" name="serial_number" class="mb-2 form-control input-customs"
+                    value="{{ old('serial_number', auth()->user()->serial_number) }}">
+                <span class="position-absolute position-custom-2"><i class="bx bxs-phone"></i></span>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label for="sex" class="form-label mb-1 w-100 text-muted position-relative">Sexe</label>
             <select id="timetableinput" name="sex" class="form-control @error('sex') is-invalid @enderror">
                 <option value="">Choisir le sexe</option>
                 @foreach(['M' => 'Masculin', 'F' => 'Féminin'] as $key => $item)
@@ -87,6 +96,16 @@
                 {{ $message }}
                 @enderror
             </div>
+        </div>
+        <div class="col-md-4 form-group">
+            <label for="birthday" class=" form-label w-100 mb-1 text-muted position-relative">Date de naissance
+            <input type="date" name="birthday" class="mb-2 form-control input-custom @error('birthday') is-invalid @enderror" value="{{ old('birthday', auth()->user()->birthday) }}">
+            </label>
+            @error('birthday')
+                <div class="invalid-feedback">
+                    {{ $message}}
+                </div>
+            @enderror
         </div>
     </div>
     <div class="d-flex justify-content-end gtb">

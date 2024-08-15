@@ -28,6 +28,7 @@ class CollaboratorUpdateRequest extends FormRequest
             'phone' => ['required'],
             'sex' => ['required'],
             'serial_number' => ["nullable"],
+            'birthday' => ["required"],
         ];
     }
 }

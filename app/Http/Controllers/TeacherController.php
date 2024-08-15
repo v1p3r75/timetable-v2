@@ -109,6 +109,7 @@ class TeacherController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
+            'birthday' => $request->birthday,
             'role_id' => Role::TEACHER,
             'password' => Hash::make($code),
         ]);
@@ -133,6 +134,7 @@ class TeacherController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
+            'birthday' => $request->birthday,
             'role_id' => Role::TEACHER,
 
         ]);

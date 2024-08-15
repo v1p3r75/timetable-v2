@@ -17,6 +17,7 @@
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Sexe</th>
+                <th>Naissance</th>
                 <th class="">Actions</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{ $teacher->phone }}</td>
                 <td>{{ $teacher->email }}</td>
                 <td>{{ $teacher->sex === "M" ? "Masculin" : "Féminin" }}</td>
+                <td>{{ $teacher->birthday ? (new DateTime($teacher->birthday))->format('d/m/Y') : "" }}</td>
                 <td class="">
                     <div class="d-flex justify-content-center align-items-center w-100 gap-1 ">
                         <a href="{{ route('teacher.edit', $teacher) }}" class="btn btn-primary rounded-1 text-light btn-action "><i class="bx bx-edit"></i></a>

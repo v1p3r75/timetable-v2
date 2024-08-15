@@ -102,6 +102,18 @@
                          @enderror
                      </div> 
                  </div>
+                 <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label for="birthday" class=" form-label w-100 mb-1 text-muted position-relative">Date de naissance
+                        <input type="date" name="birthday" class="mb-2 form-control input-custom @error('birthday') is-invalid @enderror">
+                        </label>
+                        @error('birthday')
+                            <div class="invalid-feedback">
+                                {{ $message}}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label for="password" class=" form-label w-100 mb-1 text-muted position-relative">Mot de passe

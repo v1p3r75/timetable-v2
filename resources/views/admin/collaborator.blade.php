@@ -17,6 +17,7 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Sexe</th>
+                    <th>Naissance</th>
                     <th class="">Actions</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <td>{{ $collaborator->phone }}</td>
                     <td>{{ $collaborator->email }}</td>
                     <td>{{ $collaborator->sex === "M" ? "Masculin" : "Féminin" }}</td>
+                    <td>{{ $collaborator->birthday ? (new DateTime($collaborator->birthday))->format('d/m/Y') : "" }}</td>
                     <td>
                         <div class="d-flex justify-content-center align-items-center gap-1 ">
                             <a href="{{ route('collaborator.edit', $collaborator) }}" class="btn btn-primary rounded-1 text-light btn-action"><i class="bx bx-edit"></i></a>

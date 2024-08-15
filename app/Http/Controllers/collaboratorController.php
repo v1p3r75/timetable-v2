@@ -31,6 +31,7 @@ class CollaboratorController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'serial_number' => $request->serial_number,
+            'birthday' => $request->birthday,
             'sex' => $request->sex,
             'role_id' => Role::DEPUTY_CENSOR,
             'password' => Hash::make($code),
@@ -56,6 +57,7 @@ class CollaboratorController extends Controller
             'phone' => $request->phone,
             'sex' => $request->sex,
             'serial_number' => $request->serial_number,
+            'birthday' => $request->birthday,
             'role_id' => Role::DEPUTY_CENSOR,
 
         ]);
