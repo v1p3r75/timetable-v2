@@ -8,16 +8,20 @@ use App\Models\Role;
 use App\Models\Timetable;
 use App\Models\TimetableByDay;
 use App\Models\User;
+use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Log\Logger;
 use Illuminate\Mail\Mailable;
 use Illuminate\Routing\Controller as BaseController;
 use Mail;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    public function __construct(private Logger $logger) {}
 
     protected function send_account_created_email(User $user, string $code) {
 
@@ -54,7 +58,16 @@ class Controller extends BaseController
 
     protected function send_mail(Mailable $mail, $email) {
 
-        return Mail::to($email)->send($mail);
+        try {
+
+            return Mail::to($email)->send($mail);
+
+        } catch(Exception $e) {
+
+            $this->logger->info($e->getMessage(), $e->getTrace());
+
+        }
+        
     }
     
 }

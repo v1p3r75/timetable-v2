@@ -16,10 +16,10 @@ class DeniedForAdmin
                 
                 return redirect(RouteServiceProvider::ADMIN);
             }
-            if (Auth::user()->role_id == Role::TEACHER) {
+            // if (Auth::user()->role_id == Role::TEACHER) {
 
-                return redirect(RouteServiceProvider::TEACHER);
-            }
+            //     return redirect(RouteServiceProvider::TEACHER);
+            // }
             
             return $next($request); // Redirige tous les autres utilisateurs vers la page d'accueil
 

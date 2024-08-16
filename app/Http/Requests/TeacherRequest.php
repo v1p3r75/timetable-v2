@@ -26,6 +26,7 @@ class TeacherRequest extends FormRequest
             'lastname' => ['required' , 'min:3' , 'string'],
             'email' => ['required','email', 'unique:users,email'],
             'phone' => ['required', 'unique:users,phone'],
+            'sex' => ["required"],
             'serial_number' => ["nullable", 'unique:users,serial_number'],
             'birthday' => ['required' , 'date'],
         ];

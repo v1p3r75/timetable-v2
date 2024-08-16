@@ -78,7 +78,7 @@
             </div>
             <div class="col-md-4 form-group">
                 <label for="birthday" class="mt-2">Date de naissance</label>
-                <input type="date" name="birthday" class="mb-2 form-control input-custom @error('birthday') is-invalid @enderror" {{ old('birthday',$teacher->birthday) }}>
+                <input type="date" name="birthday" class="mb-2 form-control input-custom @error('birthday') is-invalid @enderror" value="{{ old('birthday',$teacher->birthday) }}">
                 @error('birthday')
                     <div class="invalid-feedback">
                         {{ $message}}

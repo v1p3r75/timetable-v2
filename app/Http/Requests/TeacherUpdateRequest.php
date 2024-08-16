@@ -27,6 +27,7 @@ class TeacherUpdateRequest extends FormRequest
             'firstname' => ['required' , 'min:3' , 'string'],
             'lastname' => ['required' , 'min:3' , 'string'],
             'birthday' => ['required' , 'date'],
+            'sex' => ['required'],
             'serial_number' => ['nullable' , Rule::unique('users')->ignore($userId)],
             'email' => ['required','email', Rule::unique('users')->ignore($userId)],
             'phone' => ['required', Rule::unique('users')->ignore($userId)],

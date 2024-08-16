@@ -22,12 +22,12 @@
                       @if (isset($timetable_days[$key]))
                           @foreach ($timetable_days[$key] as $timetable_day)
                               <div class="py-2" style="border-bottom: 1px solid rgba(0,0,0,0.12)">
-                                <div>
+                                <div class="text-primary">
                                   {{ (new DateTime($timetable_day->start_time))->format('H:i') }}
                                   - {{ (new DateTime($timetable_day->end_time))->format('H:i') }}
                                 </div>
                                 <div>{{ $timetable_day->subject->label }}</div>
-                                <div>({{ $timetable_day->user->firstname }} {{ $timetable_day->user->lastname }})</div>
+                                <div class="text-danger">({{ $timetable_day->user->firstname }} {{ $timetable_day->user->lastname }})</div>
                               </div>
                           @endforeach
                       @endif
