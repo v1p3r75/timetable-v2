@@ -5,6 +5,7 @@
  <div class="print">
   @if($timetable_days)
   <h6 class="d-flex align-items-center justify-content-center mt-3 my-5 text-muted">Emploi de la classe {{ $timetable->level->label }}</h6>
+  <button class="btn btn-primary shadow-sm mb-3 d-flex justify-content-center btn-print" onclick="printDiv()">Imprimer</button>
   <div>
       <div class="table-responsive">
         <table class="table table-default table-bordered">

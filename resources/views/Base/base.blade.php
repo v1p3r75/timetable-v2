@@ -231,9 +231,36 @@
 
         function printDiv() {
 
-            
+            const screen = window.open('', 'Emploi du temps', 'height=650,width=900,top=100,left=150');
 
+            const link = document.createElement('link');
+            link.rel = "stylesheet"
+            link.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+
+            const title = document.createElement('title');
+            title.text = "Emploi du temps - LTN Emploi"
+
+            screen.document.head.appendChild(link);
+            screen.document.head.appendChild(title);
+
+            const timetable = document.querySelector('.print').cloneNode(true);
+            timetable.classList.add('container-fluid');
+            timetable.removeChild(timetable.querySelector('.btn-print'))
+
+            screen.document.body.appendChild(timetable);
+            screen.document.body.style.cursor = 'wait';
+            
+            screen.focus();
+
+            link.addEventListener('load', function() {
+                
+                screen.print();
+                screen.close();
+
+            })
+            
         }
+
     </script>
 </body>
 
