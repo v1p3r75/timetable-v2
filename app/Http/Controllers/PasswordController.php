@@ -32,7 +32,8 @@ class PasswordController extends Controller
             'profil' => ['nullable', 'image'],
             'sex' => ['required'],
             'birthday' => ['required'],
-            'phone' => ['nullable']
+            'phone' => ['nullable'],
+            'serial_number' => ['required'],
         ]);
     
         // Gérer le téléchargement de l'image de profil
